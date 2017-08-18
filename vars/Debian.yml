@@ -7,6 +7,8 @@ packages:
   - python-mysqldb
   - python-yaml
 
+python_deps:
+  - pymysql
 
 apache_service: apache2
 carbon_local_data_dir: /var/lib/graphite/whisper/

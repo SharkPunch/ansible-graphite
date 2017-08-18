@@ -7,8 +7,11 @@
 
 - name: install graphite and deps
   apt: name={{ item }} state=present
-  with_items: packages
+  with_items: "{{packages}}"
 
+- name: install python dependencies
+  pip: name={{ item }}
+  with_items: "{{python_deps}}"
 #- name: setup apache
 #  copy: src=apache2-graphite.conf dest=/etc/apache2/sites-available/default
 #  notify: restart apache
@@ -22,7 +25,7 @@
 - name: setup apache graphite configuration
   command: "cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-available"
 
-- name: enable graphite apache"
+- name: enable graphite apache
   command: "a2ensite apache2-graphite"
   notify:
     - restart apache
